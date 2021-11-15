@@ -4,6 +4,7 @@ Journal
 NunCitations
 
 
-def computescore():#parse paper
-    paper
-    #set paper score
+def compute_score(paper, filter_options):#parse paper
+    score = 0 #for now
+    return score
+
