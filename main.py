@@ -18,12 +18,12 @@ if __name__ == '__main__':
 
 #get user input from gui
 
-def accessPubmed():
+def accessPubmed(): #Willi
     print("all articals")
-    #each paper as instance of paper class
+    # each paper as instance of paper class
     # call scanning function
 
-def scanner():
+def scanner(): #Merit & Franzi
     abstract
     title
 
@@ -31,13 +31,14 @@ def scanner():
     #firstPages?
     #call count matches for each section
 
-def countMatches():#parse abstract and title
+def countMatches():# Berkem
+    # parse abstract and title
     # use regex
     countTitle
     countAbstract
     #call compute relevance score
     # set instance variable of paper's variable "relevance score"
 
-def sortAndCutoff():
+def sortAndCutoff(): # Merit & Franzi
     listOfReturnPapers
     #return list to gui (the first 20?)
