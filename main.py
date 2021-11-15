@@ -37,3 +37,7 @@ def countMatches():#parse abstract and title
     countAbstract
     #call compute relevance score
     # set instance variable of paper's variable "relevance score"
+
+def sortAndCutoff():
+    listOfReturnPapers
+    #return list to gui (the first 20?)
