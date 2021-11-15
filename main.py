@@ -14,3 +14,26 @@ if __name__ == '__main__':
     print_hi('PyCharm')
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+
+#get user input from gui
+
+def accessPubmed():
+    print("all articals")
+    #each paper as instance of paper class
+    # call scanning function
+
+def scanner():
+    abstract
+    title
+
+    keyWordList
+    #firstPages?
+    #call count matches for each section
+
+def countMatches():#parse abstract and title
+    # use regex
+    countTitle
+    countAbstract
+    #call compute relevance score
+    # set instance variable of paper's variable "relevance score"
