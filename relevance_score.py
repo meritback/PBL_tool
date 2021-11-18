@@ -1,7 +1,8 @@
 ## compute relevance score
 #Filter options
-Journal
-NunCitations
+
+#Journal
+#NunCitations
 
 
 def compute_score(paper, filter_options):#parse paper
