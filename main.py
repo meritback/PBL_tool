@@ -1,33 +1,48 @@
 import paper as p
 import re
 import urllib.request
-
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+import argparse
 
 
 # get user input from gui
 
+# argument parser for testing
+parser = argparse.ArgumentParser(description='Fetching and ranking pubmed papers',
+                                 formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+parser.add_argument('-k', '--keyword',
+                    type=str,
+                    help='keyword to be included in paper abstract',
+                    default='bioinformatics',
+                    metavar='')
+parser.add_argument('-n', '--numberOfPapers',
+                    type=int,
+                    help='maximum number of papers to be searched',
+                    default=100,
+                    metavar='')
+args = parser.parse_args()
+
 # testing
-test_keyword = 'cancer'
-test_amount = 100
-url = f'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term={test_keyword}&retmax={test_amount}'
+url = f'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=' \
+      f'{args.keyword}&retmax={args.numberOfPapers}'
+
 website = urllib.request.urlopen(url).read().decode('utf-8')
-print(website)
-list = re.findall(r'(?<=<Id>)\d{8}(?=</Id>)', website)
-print(list)
+idList = re.findall(r'(?<=<Id>)\d{8}(?=</Id>)', website)
+idList = list(map(int, idList))
+print(idList)
+print(len(idList))
+
 
 def access_pubmed():  # Willi
     # each paper as instance of paper class
     # call scanning function
-    #all_papers = [paper1, paper2]
+    # all_papers = [paper1, paper2]
     i = 0
-    #scanned_papers  # p.Paper[] #list of papers
+    # scanned_papers  # p.Paper[] #list of papers
     # for paper in all_papers:
     #     scanned_papers[i] = scanner(paper)
     #     i += 1
     # parse to get sorted
-    #sorted_papers = sort_and_cutoff(scanned_papers)
+    # sorted_papers = sort_and_cutoff(scanned_papers)
     # return sorted_papers
 
 
