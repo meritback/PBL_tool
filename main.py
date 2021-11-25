@@ -1,44 +1,80 @@
-# This is a sample Python script.
-
-# Press Umschalt+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Strg+F8 to toggle the breakpoint.
+import paper as p
+import re
+import urllib.request
+import argparse
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+# get user input from gui
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+# argument parser for testing
+parser = argparse.ArgumentParser(description='Fetching and ranking pubmed papers',
+                                 formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+parser.add_argument('-k', '--keyword',
+                    type=str,
+                    help='keyword to be included in paper abstract',
+                    default='bioinformatics',
+                    metavar='')
+parser.add_argument('-n', '--numberOfPapers',
+                    type=int,
+                    help='maximum number of papers to be searched',
+                    default=100,
+                    metavar='')
+args = parser.parse_args()
+
+# testing
+url = f'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=' \
+      f'{args.keyword}&retmax={args.numberOfPapers}'
+
+website = urllib.request.urlopen(url).read().decode('utf-8')
+idList = re.findall(r'(?<=<Id>)\d{8}(?=</Id>)', website)
+idList = list(map(int, idList))
+print(idList)
+print(len(idList))
 
 
-#get user input from gui
-
-def accessPubmed(): #Willi
-    print("all articals")
+def access_pubmed():  # Willi
     # each paper as instance of paper class
     # call scanning function
+    # all_papers = [paper1, paper2]
+    i = 0
+    # scanned_papers  # p.Paper[] #list of papers
+    # for paper in all_papers:
+    #     scanned_papers[i] = scanner(paper)
+    #     i += 1
+    # parse to get sorted
+    # sorted_papers = sort_and_cutoff(scanned_papers)
+    # return sorted_papers
 
-def scanner(): #Merit & Franzi
+
+def scanner(paper):  # Merit & Franzi
+    # with regex as well
     abstract
-    title
+    title = "my_title"
+    authors = "my_authors"
+    id = 0
+    year = 2021
+    # call count matches for each section
+    count_title = count_matches(title)
+    count_abstract = count_matches(abstract)
+    paper = p.Paper(title=title, authors=authors, id=id, year=year, count_abstract=count_abstract,
+                    count_title=count_title)
+    return paper
 
-    keyWordList
-    #firstPages?
-    #call count matches for each section
 
-def countMatches():# Berkem
+def count_matches(String):  # Berkem
+    matches = 0
     # parse abstract and title
     # use regex
     countTitle
     countAbstract
-    #call compute relevance score
+    # call compute relevance score
     # set instance variable of paper's variable "relevance score"
+    return matches
 
-def sortAndCutoff(): # Merit & Franzi
-    listOfReturnPapers
-    #return list to gui (the first 20?)
+
+def sort_and_cutoff(unsorted_papers):  # Merit & Franzi
+    return sorted_papers  # list
+    # return list to gui (the first 20?)
+
+
+sorted_papers = access_pubmed()
