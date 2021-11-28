@@ -7,8 +7,6 @@ import argparse
 
 # get user input from gui
 def pubmed(keyword, num):
-    print(keyword)
-    print(num)
     parser = argparse.ArgumentParser(description='Fetching and ranking pubmed papers',
                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-k', '--keyword',
@@ -30,15 +28,11 @@ def pubmed(keyword, num):
     website = urllib.request.urlopen(url).read().decode('utf-8')
     idList = re.findall(r'(?<=<Id>)\d{8}(?=</Id>)', website)
     idList = list(map(int, idList))
-    print(idList)
-    print(len(idList))
     return idList
 
 
 # stuff to run always here such as class/def
 def main():
-    pubmed("hy", 50)
-
     # argument parser for testing
     parser = argparse.ArgumentParser(description='Fetching and ranking pubmed papers',
                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter)
