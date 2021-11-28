@@ -12,8 +12,10 @@ form=cgi.FieldStorage()
 print('<form method="get" action="/cgi-bin/output.py">')
 
 #input 
-print('my keyword:')
+print('Search for:')
 print('<input type="text" name="keyWord" />')
+print('number of papers:')
+print('<input type="text" name="number" />')
 
 #submit button
 print('<input type="submit" value="Submit" />')

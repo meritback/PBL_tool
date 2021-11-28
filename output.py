@@ -8,6 +8,7 @@ print("Content-Type: text/html\r\n\r\n")
 
 form = cgi.FieldStorage()
 keyword = form.getvalue('keyWord')
+number = form.getvalue('number')
 
 print('<html>')
 print('<head><title> key word search </title></head>')
@@ -19,7 +20,7 @@ print('<h2>You searched for</h2>' + keyword)
 
 sys.path.append('PBL/PBL_tool/')
 import runner
-print(runner.pubmed(keyword, 40))
+print(runner.pubmed(keyword, number))
 
 print('</body>')
 print('</html>')
