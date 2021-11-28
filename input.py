@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 import cgi
 
 print("Content-Type: text/html\r\n\r\n")
@@ -11,7 +11,7 @@ form=cgi.FieldStorage()
 #begin form: calling this same file
 print('<form method="get" action="/cgi-bin/output.py">')
 
-#input
+#input 
 print('my keyword:')
 print('<input type="text" name="keyWord" />')
 
@@ -21,4 +21,5 @@ print('<input type="submit" value="Submit" />')
 print('</form>')
 print('</body>')
 print('</html>')
+
 

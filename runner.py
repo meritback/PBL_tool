@@ -25,7 +25,7 @@ def pubmed(keyword, num):
 
     # testing
     url = f'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=' \
-          f'{args.keyword}&retmax={args.numberOfPapers}'
+	  f'{args.keyword}&retmax={args.numberOfPapers}'
 
     website = urllib.request.urlopen(url).read().decode('utf-8')
     idList = re.findall(r'(?<=<Id>)\d{8}(?=</Id>)', website)
@@ -55,8 +55,8 @@ def main():
     args = parser.parse_args()
 
     # testing
-    url = f'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=' \
-          f'{args.keyword}&retmax={args.numberOfPapers}'
+    url = f'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term='\
+	  f'{args.keyword}&retmax={args.numberOfPapers}'
 
     website = urllib.request.urlopen(url).read().decode('utf-8')
     idList = re.findall(r'(?<=<Id>)\d{8}(?=</Id>)', website)
