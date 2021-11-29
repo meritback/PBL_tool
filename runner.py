@@ -28,6 +28,8 @@ def pubmed(keyword, num):
     website = urllib.request.urlopen(url).read().decode('utf-8')
     idList = re.findall(r'(?<=<Id>)\d{8}(?=</Id>)', website)
     idList = list(map(int, idList))
+    # create papers and add all papers to an array!
+    #call dataframe and give back dataframe instead of idList. this needs an array of papers(not just ids)
     return idList
 
 
