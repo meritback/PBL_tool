@@ -4,12 +4,8 @@ import paper as p
 
 
 
-def create_df(arrayOfPapers):
-    # array of all the papers that are being returned
-    table = np.array()
-    for paper in arrayOfPapers:
-        table.append(paper.list)
-
+def create_df(table):
+    # table should ba an array of all the papers lists that are being returned
     my_data = pd.DataFrame(data=table, index=None, columns=["title", "auther", "year", "DOI"])
 
 p1 = p.Paper("paper1", "merit", "001", "2001", 0, 1)
