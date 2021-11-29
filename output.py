@@ -16,7 +16,7 @@ print('<body>')
 print('<h1> output </h1>')
 
 #output
-print('<h2>You searched for</h2>' + keyword)
+print('<h2>Papers related to '+ keyword+ ' </h2>' + keyword)
 
 sys.path.append('PBL/PBL_tool/')
 
