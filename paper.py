@@ -18,7 +18,6 @@ class Paper:
         self.publishDate = re.search('(?<=EDAT- )[\s\S]*?(?= )', website).group()
 
         abstract = re.search(r'(?<=AB  - )[\s\S]*?(?=\.\n\S)', website).group().replace('\n      ', ' ') + '.'
-        self.list = self.list = np.array([self.title, self.authors, self.year, self.id])
         self.score = None
 
 
