@@ -17,11 +17,12 @@ print('<h1> output </h1>')
 
 #output
 print('<h2>Papers related to '+ keyword+ ': </h2>' + keyword)
-
 sys.path.append('PBL/PBL_tool/')
-
 import runner
-print(runner.pubmed(keyword, number))
+list = runner.pubmed(keyword, number)
+for paper in list:
+        print(str(paper)+"\n")
+        print('<br>')
 
 print('</body>')
 print('</html>')

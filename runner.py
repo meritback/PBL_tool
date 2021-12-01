@@ -1,4 +1,7 @@
-import paper as p
+#import paper as p
+#import sys
+#sys.path.append('/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages')
+#import numpy
 import re
 import urllib.request
 import argparse
