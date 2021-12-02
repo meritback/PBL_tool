@@ -2,11 +2,12 @@ import pandas as pd
 import numpy as np
 import paper as p
 
-
-
 def create_df(table):
     # table should ba an array of all the papers lists that are being returned
     my_data = pd.DataFrame(data=table, index=None, columns=["title", "auther", "year", "DOI"])
+
+    # get in html form:
+    html_table = my_data.to_html()
 
 p1 = p.Paper("paper1", "merit", "001", "2001", 0, 1)
 p2 = p.Paper("paper2", "merit", "002", "2001", 0, 1)
