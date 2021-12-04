@@ -8,7 +8,6 @@ import argparse
 
 
 # get user input from gui
-import PIL.PyAccess
 
 import paper
 
