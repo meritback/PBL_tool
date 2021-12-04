@@ -4,6 +4,7 @@
 import re
 import urllib.request
 import argparse
+import dataframe
 
 
 
@@ -37,7 +38,11 @@ def pubmed(keyword, num):
     idList = list(map(int, idList))
     # create papers and add all papers to an array!
     #call dataframe and give back dataframe instead of idList. this needs an array of papers(not just ids)
-    return idList
+
+    #return idList
+    #todo: testing if dataframe works!
+    return dataframe.testing_for_html()
+
 
 
 # stuff to run always here such as class/def

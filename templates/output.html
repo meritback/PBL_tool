@@ -3,8 +3,11 @@
    <div class="output">
      <h1>OUTPUT</h1>
        <p>you searched for: {{key}}</p>
-     <p>search result: {{result}}</p>
-
-
+     <p>search result:</p>
+       {% for table in tables %}
+            {{titles[loop.index]}}
+            {{ table|safe }}
+        {% endfor %}
+       <p> filtered for: {{options}}</p>
    </div>
  {% endblock %}

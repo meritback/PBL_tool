@@ -2,10 +2,20 @@
 {% block content %}
   <div class="input">
     <h1>INPUT</h1>
-    <p>Type in your keyword here.</p>
       <form method="post">
-          <input name="keyword_input"/>
-          <input name="number_input"/>
+
+          <label for="keyword_input">search for:</label>
+          <input name="keyword_input" id="keyword_input"/>
+
+          <label name="number_input">amount of results:</label>
+          <input name="number_input" id="number_input"/><br>
+
+          <p>Filter options:</p>
+          <input type="checkbox" id="newest" name="options" value="published recently">
+          <label for="newest"> recently published </label><br>
+          <input type="checkbox" id="popular" name="options" value="cited frequently">
+          <label for="popular"> cited frequently </label><br>
+
           <input type="submit"/>
       </form>
   </div>
