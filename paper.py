@@ -2,25 +2,28 @@ import urllib.request
 import relevance_score as r
 import numpy as np
 import re
+import runner
 
-# MERIT
 
 class Paper:
-    def __init__(self, pubmedId):
+    def __init__(self, medlineFile):
+        # some pubmed IDs don't seem to work with the api, therefore we need to catch this error
+        if not medlineFile.startswith('id:'):
+            self.id = re.search(r'(?<=PMID- )\d+(?=\n)', medlineFile).group()
+            self.title = re.search(r'(?<=TI  - )[\s\S]*?(?=\.\n\S)', medlineFile).group().replace('\n      ', ' ') + '.'
+            self.authors = re.findall('(?<=FAU - )[\s\S]*?(?=\n)', medlineFile)
+            self.publishDate = re.search('(?<=EDAT- )[\s\S]*?(?= )', medlineFile).group()
+            self.keywords = re.findall(r'(?<=OT  - )[\s\S]*?(?=\n)', medlineFile)
 
-        # url for pubmed file. see https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch for more info
-        url = f'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id={pubmedId}&retmode=text&rettype=medline'
-        website = urllib.request.urlopen(url).read().decode('utf-8')
+            regexAbstract = re.search(r'(?<=AB  - )[\s\S]*?(?=\.\n\S)', medlineFile)
+            # some abstracts are not available
+            if regexAbstract is not None:
+                abstract = regexAbstract.group().replace('\n      ', ' ') + '.'
+            else:
+                abstract = ''
+            self.score = None
 
-        self.id = pubmedId
-        self.title = re.search(r'(?<=TI  - )[\s\S]*?(?=\.\n\S)', website).group().replace('\n      ', ' ') + '.'
-        self.authors = re.findall('(?<=FAU - )[\s\S]*?(?=\n)', website)
-        self.publishDate = re.search('(?<=EDAT- )[\s\S]*?(?= )', website).group()
-
-        abstract = re.search(r'(?<=AB  - )[\s\S]*?(?=\.\n\S)', website).group().replace('\n      ', ' ') + '.'
-        self.score = None
-
+# keyword can be accessed with runner.keyword
 
     def set_score(self, filter_options):
         self.score = r.compute_score(self, filter_options)
-
