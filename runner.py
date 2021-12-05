@@ -84,12 +84,12 @@ def main():
             if paperObject is not None:
                 paperList.append(paperObject)
             del medlineList[0]
+        print(len(paperList))
 
-
-
-    #def sort_and_cutoff(unsorted_papers):  # Merit & Franzi
+    # def sort_and_cutoff(unsorted_papers):  # Merit & Franzi
     #    return sorted_papers  # list
     #    # return list to gui (the first 20?)
+
 
     access_pubmed()
 

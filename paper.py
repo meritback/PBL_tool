@@ -10,12 +10,12 @@ class Paper:
         # some pubmed IDs don't seem to work with the api, therefore we need to catch this error
         if not medlineFile.startswith('id:'):
             self.id = re.search(r'(?<=PMID- )\d+(?=\n)', medlineFile).group()
-            self.title = re.search(r'(?<=TI  - )[\s\S]*?(?=\.\n\S)', medlineFile).group().replace('\n      ', ' ') + '.'
-            self.authors = re.findall('(?<=FAU - )[\s\S]*?(?=\n)', medlineFile)
-            self.publishDate = re.search('(?<=EDAT- )[\s\S]*?(?= )', medlineFile).group()
+            self.title = re.search(r'(?<=TI  - )[\s\S]*?(?=[.?]\n\S)', medlineFile).group().replace('\n      ', ' ') + '.'
+            self.authors = re.findall(r'(?<=FAU - )[\s\S]*?(?=\n)', medlineFile)
+            self.publishDate = re.search(r'(?<=EDAT- )[\s\S]*?(?= )', medlineFile).group()
             self.keywords = re.findall(r'(?<=OT  - )[\s\S]*?(?=\n)', medlineFile)
 
-            regexAbstract = re.search(r'(?<=AB  - )[\s\S]*?(?=\.\n\S)', medlineFile)
+            regexAbstract = re.search(r'(?<=AB  - )[\s\S]*?(?=[.?]\n\S)', medlineFile)
             # some abstracts are not available
             if regexAbstract is not None:
                 abstract = regexAbstract.group().replace('\n      ', ' ') + '.'
