@@ -11,8 +11,8 @@ For the Layout we use **CSS**. All html files are resided in the templates folde
 * The *runner.py* file opens PubMed and returns the wished amount of papers, that contain the keyworld, for each paper an instance of the class *Paper* in the script *paper.py* is created.
 * In the Paper object we are saving the title, a list of the authors, the publishing date, and the PubMed Id for each paper, as well as a count of the occuring keyword.
 * ***TODO***: Don't we need to look into more papers? and make the cutoff at the end?
-* ***TODO***: When the paper is created, the absracts and titles are scanned for the keyword using regex and the relevance score is computed.
-* ***TODO***: A new list should be created, where the papers are ranked by the relevance score.
+* When the paper is created, the abstracts and titles are scanned for the keyword using regex and the relevance score is computed.
+* The list of papers is then sorted by score
 * The script *runner.py* creates a list of all the Paper-objects and parses it to the script *dataframe.py*, which creates a dataframe for a pandas table.
 * This table is returned to the function *input_post* in the script *start.py*, which convertes it into an html table and returns the *output.html* tamplate, which gets parsed the html table.
 * On the webpage, the *output.py* is shown, displaying a the table with the search results. It is possible to retun to the *input.html* at any time, clicking on input again.

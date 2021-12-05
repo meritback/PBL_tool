@@ -39,8 +39,11 @@ def pubmed(keyword, num):
         if paperObject.status:
             paperList.append(paperObject)
         del medlineList[0]
+    #sort papers by their score
+    sortedList = sorted(paperList, key=lambda paper: paper.score, reverse=True);
 
-    return dataframe.create_df(paperList)
+    #return dataframe.create_df(paperList)
+    return dataframe.create_df(sortedList)
 
 
 # stuff to run always here such as class/def

@@ -40,7 +40,7 @@ class Paper:
             self.score = r.compute_score(searchTerm, self.title, abstract)
 
             #todo new
-            self.list = np.array([self.title, self.authors[0], self.publishDate, self.id])
+            self.list = np.array([self.title, self.authors[0], self.publishDate,self.score, self.id])
         else:
             self.status = False
 

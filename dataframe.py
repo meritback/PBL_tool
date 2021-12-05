@@ -10,7 +10,7 @@ def create_df(paperList):
         paper_lists.append(paper.list)
 
     # table should ba an array of all the papers lists that are being returned
-    my_data = pd.DataFrame(data=paper_lists, index=None, columns=["title", "author", "year", "DOI"])
+    my_data = pd.DataFrame(data=paper_lists, index=None, columns=["title", "author", "year", "score", "DOI"])
     print(my_data)
     return my_data
 
