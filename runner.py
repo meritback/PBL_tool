@@ -4,15 +4,8 @@
 import re
 import urllib.request
 import argparse
-
-
-
-# get user input from gui
-
 import paper
-
-
-keyword = ''
+import arguments
 
 
 def pubmed(keyword, num):
@@ -29,7 +22,6 @@ def pubmed(keyword, num):
                         default=num,
                         metavar='')
     args = parser.parse_args()
-    keyword = args.keyword
 
     # testing
     url = f'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=' \
@@ -59,7 +51,7 @@ def main():
                         default=100,
                         metavar='')
     args = parser.parse_args()
-    keyword = args.keyword
+    arguments.set_searchTerm(args.keyword)
 
     def access_pubmed():
         # calling pubmed-API via a url. for more info see: https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.ESearch
@@ -81,7 +73,7 @@ def main():
         paperList = []
         while len(medlineList) > 0:
             paperObject = paper.Paper(medlineList[0])
-            if paperObject is not None:
+            if paperObject.status:
                 paperList.append(paperObject)
             del medlineList[0]
         print(len(paperList))
@@ -93,9 +85,8 @@ def main():
 
     access_pubmed()
 
+
 if __name__ == "__main__":
    # stuff only to run when not called via 'import' here
    main()
-
-
 

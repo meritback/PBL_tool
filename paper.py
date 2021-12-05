@@ -3,12 +3,16 @@ import relevance_score as r
 import numpy as np
 import re
 import runner
+import arguments
 
 
 class Paper:
     def __init__(self, medlineFile):
         # some pubmed IDs don't seem to work with the api, therefore we need to catch this error
         if not medlineFile.startswith('id:'):
+            # attribute for checking if the paper can be properly created
+            self.status = True
+
             self.id = re.search(r'(?<=PMID- )\d+(?=\n)', medlineFile).group()
             self.title = re.search(r'(?<=TI  - )[\s\S]*?(?=[.?]\n\S)', medlineFile).group().replace('\n      ', ' ') + '.'
             self.authors = re.findall(r'(?<=FAU - )[\s\S]*?(?=\n)', medlineFile)
@@ -21,9 +25,12 @@ class Paper:
                 abstract = regexAbstract.group().replace('\n      ', ' ') + '.'
             else:
                 abstract = ''
-            self.score = None
 
-# keyword can be accessed with runner.keyword
+            searchTerm = arguments.searchTerm
+            self.score = r.compute_score(searchTerm, self.title, abstract)
+        else:
+            self.status = False
 
-    def set_score(self, filter_options):
-        self.score = r.compute_score(self, filter_options)
+
+    #def set_score(self, filter_options):
+    #    self.score = r.compute_score(self, filter_options)
