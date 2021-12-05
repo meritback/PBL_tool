@@ -12,7 +12,8 @@ def input_post():
     number = request.form['number_input']
     filter_options = request.form.getlist('options')
     list = runner.pubmed(keyword, number)
-    html_table = list.to_html()
+    #html_table = list.to_html()
+    print(list)
     return render_template('output.html', key = keyword, tables=[list.to_html(classes='data', header="true")],titles = list.columns.values, options = filter_options)
 @app.route('/output/', methods=['POST'])
 def output():
