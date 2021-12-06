@@ -1,13 +1,13 @@
 {% extends "layout.html" %}
 {% block content %}
    <div class="output">
-     <h1>OUTPUT</h1>
-       <p>you searched for: {{key}}</p>
-     <p>search result:</p>
+     <h1 style="font-size: 25px;color:#37473c;text-decoration: underline">OUTPUT</h1>
+       <p style="font-size: 15px">you searched for: <p style="color: #335c37;padding: 1px;font-weight: bold;text-transform: uppercase"> {{key}}</p>
+     <p style="font-size: 15px;text-decoration: underline"> search result:</p>
        {% for table in tables %}
-            {{titles[loop.index]}}
+            <!---{{titles[loop.index]}}--->
             {{ table|safe }}
         {% endfor %}
-       <p> filtered for: {{options}}</p>
+       <p style="font-size: 15px"> filtered for: {{options}}</p>
    </div>
  {% endblock %}

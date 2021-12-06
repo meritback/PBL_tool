@@ -1,15 +1,78 @@
 <!DOCTYPE html>
 <html>
+  <head>
+  <style>
+    body {
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #444;
+    }
+
+    header {
+      background-color: #0e570c;
+      height: 35px;
+      width: 100%;
+      opacity: .9;
+      margin-bottom: 10px;
+    }
+
+    header h1.logo {
+      margin: 0;
+      font-size: 1.7em;
+      color: #fff;
+      text-transform: uppercase;
+      float: left;
+    }
+
+    header h1.logo:hover {
+      color: #fff;
+      text-decoration: none;
+      width: 100%;
+    }
+
+    header div.output{
+      margin: 0;
+      font-size: 15px;
+      color: #323131;
+      text-transform: uppercase;
+      float: left;
+    }
+    /*
+     * Centering the body content
+     */
+    .container {
+      width: 1200px;
+      margin: 0 auto;
+    }
+    div.input {
+      padding: 10px 0 30px 0;
+      background-color: #E6E6FA;
+      -webkit-border-radius: 6px;
+         -moz-border-radius: 6px;
+              border-radius: 6px;
+    }
+    div.output {
+      padding: 10px 0 30px 0;
+      background-color: #E6E6FA;
+      -webkit-border-radius: 6px;
+         -moz-border-radius: 6px;
+              border-radius: 6px;
+    }
+    table,th, td {
+      font-size:15pt;
+      border:2.5px solid #3f6a3f;
+      text-align: center;
+
+    }
+    th, td {padding: 5px;}
+
+  </style>
+  </head>
   <body>
     <header>
       <div class="container">
         <h1 class="logo">Keyword Searching Tool</h1>
-        <strong><nav>
-          <ul class="menu">
-            <li><a href="{{ url_for('input') }}">Input</a></li>
-            <!--<li><a href="{{ url_for('output') }}">Output</a></li>-->
-          </ul>
-        </nav></strong>
       </div>
     </header>
     <div class="container">
