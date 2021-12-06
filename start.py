@@ -9,9 +9,10 @@ def input():
 @app.route('/', methods=['POST'])
 def input_post():
     keyword = request.form['keyword_input']
-    number = request.form['number_input'] #working with static size 5 for now
+    number = request.form['number_input']
+    filter_options = request.form.getlist('options')
     list = runner.pubmed(keyword, number)
-    return render_template('output.html', key = keyword, result = list )
+    return render_template('output.html', key = keyword, tables=[list.to_html(classes='data', header="true")],titles = list.columns.values, options = filter_options)
 @app.route('/output/', methods=['POST'])
 def output():
     return render_template('output.html')
