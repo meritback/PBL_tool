@@ -7,16 +7,6 @@ import re
 # MERIT
 
 class Paper:
-    #one init needs to be outcommented: for testing purpose only
-    """def __init__(self, name, author, year, id):
-        self.id = id
-        self.name = name
-        self.authors = author
-        self.publishDate = year
-        self.score = None
-        self.list = np.array([self.name, self.authors, self.publishDate, self.id])"""
-
-
     def __init__(self, medlineFile):
         # some pubmed IDs don't seem to work with the api, therefore we need to catch this error
         if not medlineFile.startswith('id:'):
