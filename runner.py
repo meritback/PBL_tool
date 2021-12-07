@@ -16,10 +16,11 @@ def pubmed(keyword, num):
 
     # set keyword in arguments class
     arguments.set_searchTerm(keyword)
+    urlKeyword = keyword.replace(' ', '+')
 
     # calling pubmed-API via a url. for more info see: https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.ESearch
     url = f'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=' \
-          f'{keyword}&retmax={num}&usehistory=y'
+          f'{urlKeyword}&retmax={num}&usehistory=y'
     website = urllib.request.urlopen(url).read().decode('utf-8')
 
     queryKey = re.search(r'(?<=<QueryKey>)\d+(?=<\/QueryKey>)', website).group()
@@ -53,12 +54,13 @@ def main():
                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-k', '--keyword',
                         type=str,
-                        help='keyword to be included in paper abstract',
+                        help='Keyword to be included in paper abstract. If the keyword consists of multiple words, '
+                             'replace whitespaces with +. e.g.: lung+cancer',
                         default='cancer',
                         metavar='')
     parser.add_argument('-n', '--numberOfPapers',
                         type=int,
-                        help='maximum number of papers to be searched',
+                        help='Maximum number of papers to be searched',
                         default=100,
                         metavar='')
     args = parser.parse_args()
