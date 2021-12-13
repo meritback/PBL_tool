@@ -14,7 +14,7 @@ class Paper:
             self.status = True
 
             self.id = re.search(r'(?<=PMID- )\d+(?=\n)', medlineFile).group()
-            self.title = re.search(r'(?<=TI  - )[\s\S]*?(?=[.?]?\n\S)', medlineFile).group().replace('\n      ', ' ') + '.'
+            self.title = re.search(r'(?<=(TI  - |TT  - ))[\s\S]*?(?=[.?]?\n\S)', medlineFile).group().replace('\n      ', ' ') + '.'
             self.authors = re.findall(r'(?<=FAU - )[\s\S]*?(?=\n)', medlineFile)
             self.publishDate = re.search(r'(?<=EDAT- )[\s\S]*?(?= )', medlineFile).group()
             self.keywords = re.findall(r'(?<=OT  - )[\s\S]*?(?=\n)', medlineFile)
