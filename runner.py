@@ -9,7 +9,7 @@ import arguments
 import dataframe
 
 
-def pubmed(keyword, num):
+def pubmed(keyword, m):
     #todo testing: use different constructor for paper
     #return dataframe.testing_for_html
     print("runnning pubmed")
@@ -17,6 +17,8 @@ def pubmed(keyword, num):
     # set keyword in arguments class
     arguments.set_searchTerm(keyword)
     urlKeyword = keyword.replace(' ', '+')
+
+    num = -1
 
     # calling pubmed-API via a url. for more info see: https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.ESearch
     if num != -1:
@@ -48,8 +50,10 @@ def pubmed(keyword, num):
         if paperObject.status:
             paperList.append(paperObject)
         del medlineList[0]
-    #sort papers by their score
-    sortedList = sorted(paperList, key=lambda paper: paper.score, reverse=True);
+    #sort papers by their score and use cutOff
+    cutOffList = paperList[0:int(m)]
+    sortedList = sorted(cutOffList, key=lambda paper: paper.score, reverse=True);
+
 
     #return dataframe.create_df(paperList)
     return dataframe.create_df(sortedList)
