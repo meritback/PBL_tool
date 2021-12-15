@@ -11,18 +11,23 @@ filer_options = []
 @app.route('/')
 def input():
     return render_template('input.html')
+
 @app.route('/', methods=['POST'])
 def input_post():
     keyword = request.form['keyword_input']
     number = request.form['number_input']
     filter_options = request.form.getlist('options')
     list = runner.pubmed(keyword, number)
-    return render_template('output.html', key = keyword, tables=[list.to_html(classes='data', header="true")],titles = list.columns.values, options = filter_options)
-"""
-@app.route('/output/', methods=['POST'])
-def output():
-    return render_template('output.html')
+    return render_template('output.html', key=keyword, tables=[list.to_html(classes='data', header="true")], titles=list.columns.values, options = filter_options)
 
+@app.route('/output', methods=['POST'])
+def sorting():
+    if request.method == 'POST':
+        print('hi')
+    #return redirect(url_for('input.html'))
+    return render_template('input.html')
+
+"""
 @app.route('/', methods=['POST'])
 def output_post():
     sorted_by = request.form.get('sorting')
