@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 import pandas as pd
 import runner
 
@@ -18,14 +18,13 @@ def input_post():
     number = request.form['number_input']
     filter_options = request.form.getlist('options')
     list = runner.pubmed(keyword, number)
-    return render_template('output.html', key=keyword, tables=[list.to_html(classes='data', header="true")], titles=list.columns.values, options = filter_options)
+    return render_template('output.html', key=keyword, tables=[list.to_html(classes='data', header="true")], titles=list.columns.values, options=filter_options)
 
 @app.route('/output', methods=['POST'])
 def sorting():
-    if request.method == 'POST':
-        print('hi')
+    print('hi')
     #return redirect(url_for('input.html'))
-    return render_template('input.html')
+    return redirect(url_for('input'))
 
 """
 @app.route('/', methods=['POST'])
