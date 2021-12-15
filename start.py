@@ -22,9 +22,13 @@ def input_post():
 
 @app.route('/output', methods=['POST'])
 def sorting():
+    keyword = "bioinfo"
+    list = runner.pubmed(keyword, 1)
+    filter_options = []
     print('hi')
-    #return redirect(url_for('input.html'))
-    return redirect(url_for('input'))
+    return render_template('output.html', key=keyword, tables=[list.to_html(classes='data', header="true")], titles=list.columns.values, options=filter_options)
+    #return redirect(url_for('input'))
+
 
 """
 @app.route('/', methods=['POST'])
