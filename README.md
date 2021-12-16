@@ -9,6 +9,7 @@ For the Layout we use **CSS**. All html files are resided in the templates folde
 * By opening the link, the *input.html* file is opened. Here the user input can be parsed, we allow a keyword, a number for the amount of papers that is wished to be returned, as well as filter options (filter options are not included into relevance score yet).
 * When the submit button is pressed, the *input_post* function in the script *start.py* is executed. The user input is requested from the *input.html* file and the *runner.py* file is being called and gets parsed the user input.
 * The *runner.py* file opens PubMed and returns the wished amount of papers, that contain the keyworld, for each paper an instance of the class *Paper* in the script *paper.py* is created.
+* ***TODO***: Make the scanning Progress faster! It's taking AAAAGES!! ANY IDEAS ARE WELCOME
 * You can run the *runner.py* with an argument parser for testing purposes. For more info on the parser execute *runner.py --help*
 * In the Paper object we are saving the title, a list of the authors, the publishing date, and the PubMed Id for each paper, as well as a count of the occuring keyword.
 * When the paper is created, the abstracts and titles are scanned for the keyword using regex and the relevance score is computed.
