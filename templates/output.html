@@ -7,10 +7,14 @@
         <p style="font-size: 15px">you searched for: <p style="color: #335c37;padding: 1px;font-weight: bold;text-transform: uppercase"> {{key}}</p>
 
        <form method="post" action = {{url_for('sorting')}}>
-        <input type="radio" id="score" name="sorting" value="sort by score">
+        <input type="radio" id="score" name="sorting" value="score">
         <label for="score"> sort by score </label><br>
-        <input type="radio" id="alphabetically" name="sorting" value="sort alphabetically">
-        <label for="alphabetically"> sort alphabetically </label><br>
+        <input type="radio" id="title" name="sorting" value="title">
+        <label for="title"> sort alphabetically by title </label><br>
+        <input type="radio" id="author" name="sorting" value="author">
+        <label for="author"> sort alphabetically by author </label><br>
+        <input type="radio" id="date" name="sorting" value="date">
+        <label for="date"> sort by date </label><br>
         <input type="submit"/>
        </form>
 

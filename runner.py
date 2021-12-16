@@ -10,8 +10,7 @@ import dataframe
 
 
 def pubmed(keyword, m):
-    #todo testing: use different constructor for paper
-    #return dataframe.testing_for_html
+
     print("runnning pubmed")
 
     # set keyword in arguments class
@@ -54,7 +53,6 @@ def pubmed(keyword, m):
     #sort papers by their score and use cutOff
     cutOffList = paperList[0:int(m)]
     sortedList = sorted(cutOffList, key=lambda paper: paper.score, reverse=True);
-
 
     #return dataframe.create_df(paperList)
     return dataframe.create_df(sortedList)

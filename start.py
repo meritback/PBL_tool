@@ -3,17 +3,14 @@ import pandas as pd
 import runner
 
 app = Flask(__name__)
-"""
-keyword = 'bioinformatics'
-number = 10
-filer_options = []
-"""
+
 @app.route('/')
 def input():
     return render_template('input.html')
 
 @app.route('/', methods=['POST'])
 def input_post():
+    global keyword, number, filter_options, list
     keyword = request.form['keyword_input']
     number = request.form['number_input']
     filter_options = request.form.getlist('options')
@@ -22,22 +19,11 @@ def input_post():
 
 @app.route('/output', methods=['POST'])
 def sorting():
-    keyword = "bioinfo"
-    list = runner.pubmed(keyword, 1)
-    filter_options = []
-    print('hi')
-    return render_template('output.html', key=keyword, tables=[list.to_html(classes='data', header="true")], titles=list.columns.values, options=filter_options)
+    sort_by = request.form['sorting']
+    sorted_list = list.sort_values(by=[sort_by])
+    return render_template('output.html', key=keyword, tables=[sorted_list.to_html(classes='data', header="true")], titles=list.columns.values, options=filter_options)
     #return redirect(url_for('input'))
 
-
-"""
-@app.route('/', methods=['POST'])
-def output_post():
-    sorted_by = request.form.get('sorting')
-    list = runner.pubmed(keyword, number)
-    sorted_list = list.sort
-    return render_template('output.html', key = keyword, tables=[list.to_html(classes='data', header="true")],titles = list.columns.values, options = filter_options)
-"""
 
 if __name__ == '__main__':
     app.run(debug=True)#set false when put online
