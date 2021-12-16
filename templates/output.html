@@ -7,7 +7,7 @@
         <p style="font-size: 15px">you searched for: <p style="color: #335c37;padding: 1px;font-weight: bold;text-transform: uppercase"> {{key}}</p>
 
        <form method="post" action = {{url_for('sorting')}}>
-        <input type="radio" id="score" name="sorting" value="score">
+        <input type="radio" id="score" name="sorting" value="score" checked>
         <label for="score"> sort by score </label><br>
         <input type="radio" id="title" name="sorting" value="title">
         <label for="title"> sort alphabetically by title </label><br>

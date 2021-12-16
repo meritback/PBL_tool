@@ -22,6 +22,7 @@ def sorting():
     # just sorting the dataframe ba a column
     sort_by = request.form['sorting']
     sorted_list = list.sort_values(by=[sort_by])
+
     return render_template('output.html', key=keyword, tables=[sorted_list.to_html(classes='data', header="true")], titles=list.columns.values, options=filter_options)
 
 

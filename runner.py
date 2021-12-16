@@ -19,7 +19,7 @@ def pubmed(keyword, m, filter_options):
     urlKeyword = keyword.replace(' ', '+')
 
     #todo: set on -1 when going online, for now 1000 for testing purposes
-    num = 1000
+    num = 100
 
     # calling pubmed-API via a url. for more info see: https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.ESearch
     if num != -1:
