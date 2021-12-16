@@ -9,9 +9,10 @@ import arguments
 import dataframe
 
 
-def pubmed(keyword, m):
+def pubmed(keyword, m, filter_options):
 
     print("runnning pubmed")
+    print(filter_options)
 
     # set keyword in arguments class
     arguments.set_searchTerm(keyword)

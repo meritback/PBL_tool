@@ -11,7 +11,6 @@ For the Layout we use **CSS**. All html files are resided in the templates folde
 * The *runner.py* file opens PubMed and returns the wished amount of papers, that contain the keyworld, for each paper an instance of the class *Paper* in the script *paper.py* is created.
 * You can run the *runner.py* with an argument parser for testing purposes. For more info on the parser execute *runner.py --help*
 * In the Paper object we are saving the title, a list of the authors, the publishing date, and the PubMed Id for each paper, as well as a count of the occuring keyword.
-* ***TODO***: Don't we need to look into more papers? and make the cutoff at the end?
 * When the paper is created, the abstracts and titles are scanned for the keyword using regex and the relevance score is computed.
 * The list of papers is then sorted by score
 * ***TODO*** make it possible to parse a 2nd numeric parameter, to change the amount of papers that are being returned.
