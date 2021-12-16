@@ -13,6 +13,7 @@ For the Layout we use **CSS**. All html files are resided in the templates folde
 * You can run the *runner.py* with an argument parser for testing purposes. For more info on the parser execute *runner.py --help*
 * In the Paper object we are saving the title, a list of the authors, the publishing date, and the PubMed Id for each paper, as well as a count of the occuring keyword.
 * When the paper is created, the abstracts and titles are scanned for the keyword using regex and the relevance score is computed.
+* ***TODO***: IMPROVE the relevance score
 * The list of papers is then sorted by score
 * The script *runner.py* creates a list of all the Paper-objects and parses it to the script *dataframe.py*, which creates a dataframe for a pandas table.
 * This table is returned to the function *input_post* in the script *start.py*, which convertes it into an html table and returns the *output.html* tamplate, which gets parsed the html table.
