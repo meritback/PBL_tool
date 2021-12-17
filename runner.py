@@ -28,6 +28,11 @@ def pubmed(keyword, m, filter_options):
     else:
         url = f'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=' \
               f'{urlKeyword}&usehistory=y'
+
+    # check filter options
+    # published within last 5 years
+    if 'published recently' in filter_options:
+        url = url + '&reldate=1826'
     website = urllib.request.urlopen(url).read().decode('utf-8')
 
     queryKey = re.search(r'(?<=<QueryKey>)\d+(?=<\/QueryKey>)', website).group()
