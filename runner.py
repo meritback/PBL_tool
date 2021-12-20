@@ -9,16 +9,17 @@ import arguments
 import dataframe
 
 
-def pubmed(keyword, m):
-    #todo testing: use different constructor for paper
-    #return dataframe.testing_for_html
+def pubmed(keyword, m, filter_options):
+
     print("runnning pubmed")
+    print(filter_options)
 
     # set keyword in arguments class
     arguments.set_searchTerm(keyword)
     urlKeyword = keyword.replace(' ', '+')
 
-    num = -1
+    #todo: set on -1 when going online, for now 1000 for testing purposes
+    num = 100
 
     # calling pubmed-API via a url. for more info see: https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.ESearch
     if num != -1:
@@ -27,6 +28,11 @@ def pubmed(keyword, m):
     else:
         url = f'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=' \
               f'{urlKeyword}&usehistory=y'
+
+    # check filter options
+    # published within last 5 years
+    if 'published recently' in filter_options:
+        url = url + '&reldate=1826'
     website = urllib.request.urlopen(url).read().decode('utf-8')
 
     queryKey = re.search(r'(?<=<QueryKey>)\d+(?=<\/QueryKey>)', website).group()
@@ -53,7 +59,6 @@ def pubmed(keyword, m):
     #sort papers by their score and use cutOff
     cutOffList = paperList[0:int(m)]
     sortedList = sorted(cutOffList, key=lambda paper: paper.score, reverse=True);
-
 
     #return dataframe.create_df(paperList)
     return dataframe.create_df(sortedList)

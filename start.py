@@ -1,40 +1,33 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 import pandas as pd
 import runner
 
 app = Flask(__name__)
-"""
-keyword = 'bioinformatics'
-number = 10
-filer_options = []
-"""
+
 @app.route('/')
 def input():
     return render_template('input.html')
 
 @app.route('/', methods=['POST'])
 def input_post():
+    global keyword, number, filter_options, list
     keyword = request.form['keyword_input']
     number = request.form['number_input']
     filter_options = request.form.getlist('options')
-    list = runner.pubmed(keyword, number)
-    return render_template('output.html', key=keyword, tables=[list.to_html(classes='data', header="true")], titles=list.columns.values, options = filter_options)
+    list = runner.pubmed(keyword, number, filter_options)
+    return render_template('output.html', key=keyword, tables=[list.to_html(classes='data', header="true")], titles=list.columns.values, options=filter_options)
 
 @app.route('/output', methods=['POST'])
 def sorting():
-    if request.method == 'POST':
-        print('hi')
-    #return redirect(url_for('input.html'))
-    return render_template('input.html')
+    # just sorting the dataframe ba a column
+    sort_by = request.form['sorting']
+    #score needs to be reversed
+    if sort_by=='score' or sort_by=='date':
+        sorted_list = list.sort_values(by=[sort_by], ascending=[False])
+    else: #everything else is fine
+        sorted_list = list.sort_values(by=[sort_by])
+    return render_template('output.html', key=keyword, tables=[sorted_list.to_html(classes='data', header="true")], titles=list.columns.values, options=filter_options)
 
-"""
-@app.route('/', methods=['POST'])
-def output_post():
-    sorted_by = request.form.get('sorting')
-    list = runner.pubmed(keyword, number)
-    sorted_list = list.sort
-    return render_template('output.html', key = keyword, tables=[list.to_html(classes='data', header="true")],titles = list.columns.values, options = filter_options)
-"""
 
 if __name__ == '__main__':
     app.run(debug=True)#set false when put online
