@@ -15,7 +15,7 @@ def input_post():
     number = request.form['number_input']
     filter_options = request.form.getlist('options')
     list = runner.pubmed(keyword, number, filter_options)
-    return render_template('output.html', key=keyword, tables=[list.to_html(classes='data', header="true")], titles=list.columns.values, options=filter_options)
+    return render_template('output.html', key=keyword, tables=[list.to_html(classes='data', header="true")], titles=list.columns.values, options=filter_options, check='score')
 
 @app.route('/output', methods=['POST'])
 def sorting():
@@ -26,7 +26,7 @@ def sorting():
         sorted_list = list.sort_values(by=[sort_by], ascending=[False])
     else: #everything else is fine
         sorted_list = list.sort_values(by=[sort_by])
-    return render_template('output.html', key=keyword, tables=[sorted_list.to_html(classes='data', header="true")], titles=list.columns.values, options=filter_options)
+    return render_template('output.html', key=keyword, tables=[sorted_list.to_html(classes='data', header="true")], titles=list.columns.values, options=filter_options,check=sort_by)
 
 
 if __name__ == '__main__':

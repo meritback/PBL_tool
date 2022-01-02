@@ -7,15 +7,47 @@
         <p style="font-size: 15px">you searched for: <p style="color: #335c37;padding: 1px;font-weight: bold;text-transform: uppercase"> {{key}}</p>
 
        <form method="post" action = {{url_for('sorting')}}>
+        {% if (check == 'score'): %}
         <input type="radio" id="score" name="sorting" value="score" checked>
+        <label for="score"> sort by score </label><br>
+        <input type="radio" id="title" name="sorting" value="title" >
+        <label for="title"> sort alphabetically by title </label><br>
+        <input type="radio" id="author" name="sorting" value="author" >
+        <label for="author"> sort alphabetically by author </label><br>
+        <input type="radio" id="date" name="sorting" value="date" >
+        <label for="date"> sort by date </label><br>
+        <input type="submit" name="sort"/>
+        {% elif (check == 'title'): %}
+        <input type="radio" id="score" name="sorting" value="score">
+        <label for="score"> sort by score </label><br>
+        <input type="radio" id="title" name="sorting" value="title"  checked>
+        <label for="title"> sort alphabetically by title </label><br>
+        <input type="radio" id="author" name="sorting" value="author" >
+        <label for="author"> sort alphabetically by author </label><br>
+        <input type="radio" id="date" name="sorting" value="date" >
+        <label for="date"> sort by date </label><br>
+        <input type="submit" name="sort"/>
+        {% elif (check == 'author'): %}
+        <input type="radio" id="score" name="sorting" value="score">
         <label for="score"> sort by score </label><br>
         <input type="radio" id="title" name="sorting" value="title">
         <label for="title"> sort alphabetically by title </label><br>
-        <input type="radio" id="author" name="sorting" value="author">
+        <input type="radio" id="author" name="sorting" value="author"   checked>
         <label for="author"> sort alphabetically by author </label><br>
-        <input type="radio" id="date" name="sorting" value="date">
+        <input type="radio" id="date" name="sorting" value="date" >
         <label for="date"> sort by date </label><br>
         <input type="submit" name="sort"/>
+       {% else %}
+        <input type="radio" id="score" name="sorting" value="score">
+        <label for="score"> sort by score </label><br>
+        <input type="radio" id="title" name="sorting" value="title">
+        <label for="title"> sort alphabetically by title </label><br>
+        <input type="radio" id="author" name="sorting" value="author" >
+        <label for="author"> sort alphabetically by author </label><br>
+        <input type="radio" id="date" name="sorting" value="date"  checked >
+        <label for="date"> sort by date </label><br>
+        <input type="submit" name="sort"/>
+       {% endif %}
        </form>
 
         <p style="font-size: 15px;text-decoration: underline"> search result:</p>
