@@ -83,7 +83,7 @@ def main():
     args = parser.parse_args()
     arguments.set_searchTerm(args.keyword)
 
-    paperList = pubmed(args.keyword, args.numberOfPapers)
+    paperList = pubmed(args.keyword, args.numberOfPapers, [])
     print(len(paperList))
 
 
