@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request, redirect, url_for
-import pandas as pd
 import runner
 
 app = Flask(__name__)
@@ -16,7 +15,9 @@ def input_post():
     filter_options = request.form.getlist('options')
     try:
         list = runner.pubmed(keyword, number, filter_options)
-        return render_template('output.html', key=keyword, tables=[list.to_html(classes='data', header="true")],
+        # add hyperlink for each ID
+        list['ID']=('<a href=https://pubmed.ncbi.nlm.nih.gov/' + list['ID'] + '/ >' + list['ID'] + '</a>')
+        return render_template('output.html', key=keyword, tables=[list.to_html(classes='data', header="true", escape=False)],
                                titles=list.columns.values, options=filter_options, check='score')
     except (AttributeError):
         return render_template('outputError.html', key = keyword)
