@@ -3,12 +3,13 @@
   <div class="input">
     <h1 style="font-size: 25px;color:#37473c;text-decoration: underline">INPUT</h1>
       <form method="post">
-
           <label for="keyword_input">search for:</label>
-          <input name="keyword_input" id="keyword_input"/>
+          <input type="text" pattern="^[\x20-\x7F]+$"  name="keyword_input" id="keyword_input"/>
 
           <label name="number_input">amount of results:</label>
-          <input name="number_input" id="number_input"/><br>
+          <!--add a max of 100 000 eg -->
+          <input type="number" min="-1" max="100" name="number_input" id="number_input"/><br>
+
 
           <p>Filter options:</p>
           <input type="checkbox" id="newest" name="options" value="published recently">
@@ -17,6 +18,7 @@
           <label for="popular"> cited frequently (more than ... times?) </label><br>
 
           <input type="submit" name="search"/>
+          <p>note: please only use ASCII characters</p>
       </form>
   </div>
 {% endblock %}
