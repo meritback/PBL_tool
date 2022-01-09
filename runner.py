@@ -57,8 +57,13 @@ def pubmed(keyword, m, filter_options):
             paperList.append(paperObject)
         del medlineList[0]
     #sort papers by their score and use cutOff
-    cutOffList = paperList[0:int(m)]
-    sortedList = sorted(cutOffList, key=lambda paper: paper.score, reverse=True);
+
+    if int(m) != -1:
+        cutOffList = paperList[0:int(m)]
+        sortedList = sorted(cutOffList, key=lambda paper: paper.score, reverse=True);
+    else:
+        sortedList = sorted(paperList, key=lambda paper: paper.score, reverse=True);
+
 
     #return dataframe.create_df(paperList)
     return dataframe.create_df(sortedList)
