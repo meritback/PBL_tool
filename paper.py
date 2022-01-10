@@ -1,10 +1,8 @@
-import urllib.request
 import relevance_score as r
 import numpy as np
 import arguments
 import re
 
-# MERIT
 
 class Paper:
     def __init__(self, medlineFile):
@@ -12,37 +10,37 @@ class Paper:
         if not medlineFile.startswith('id:'):
             # attribute for checking if the paper can be properly created
             self.status = True
+            try:
+                self.id = re.search(r'(?<=PMID- )\d+(?=\n)', medlineFile).group()
+                self.title = re.search(r'(?<=(TI  - |TT  - |BTI - ))[\s\S]*?(?=[.?]?\n\S)', medlineFile).group().replace('\n      ', ' ') + '.'
+                self.authors = re.findall(r'(?<=FAU - )[\s\S]*?(?=\n)', medlineFile)
+                self.publishDate = re.search(r'(?<=EDAT- )[\s\S]*?(?= )', medlineFile).group()
+                self.keywords = re.findall(r'(?<=OT  - )[\s\S]*?(?=\n)', medlineFile)
 
-            self.id = re.search(r'(?<=PMID- )\d+(?=\n)', medlineFile).group()
-            self.title = re.search(r'(?<=(TI  - |TT  - |BTI - ))[\s\S]*?(?=[.?]?\n\S)', medlineFile).group().replace('\n      ', ' ') + '.'
-            self.authors = re.findall(r'(?<=FAU - )[\s\S]*?(?=\n)', medlineFile)
-            self.publishDate = re.search(r'(?<=EDAT- )[\s\S]*?(?= )', medlineFile).group()
-            self.keywords = re.findall(r'(?<=OT  - )[\s\S]*?(?=\n)', medlineFile)
+                regexAbstract = re.search(r'(?<=AB  - )[\s\S]*?(?=[.?]\n\S)', medlineFile)
+                # some abstracts are not available
+                if regexAbstract is not None:
+                    abstract = regexAbstract.group().replace('\n      ', ' ') + '.'
+                else:
+                    abstract = ''
 
-            regexAbstract = re.search(r'(?<=AB  - )[\s\S]*?(?=[.?]\n\S)', medlineFile)
-            # some abstracts are not available
-            if regexAbstract is not None:
-                abstract = regexAbstract.group().replace('\n      ', ' ') + '.'
-            else:
-                abstract = ''
+                # if there are no authors, use publisher
+                if len(self.authors) == 0:
+                    self.authors = re.findall(r'(?<=PB  - )[\s\S]*?(?=\n)', medlineFile)
+                # if there is no publisher, return message
+                if len(self.authors) == 0:
+                    self.authors = ["no author/publisher available"]
 
-            # if there are no authors, use publisher
-            if len(self.authors) == 0:
-                self.authors = re.findall(r'(?<=PB  - )[\s\S]*?(?=\n)', medlineFile)
-            # if there is no publisher, return message
-            if len(self.authors) == 0:
-                self.authors = ["no author/publisher available"]
+                searchTerm = arguments.searchTerm
+                self.score = r.compute_score(searchTerm, self.title, abstract)
 
-            searchTerm = arguments.searchTerm
-            self.score = r.compute_score(searchTerm, self.title, abstract)
-
-            #todo new
-            self.list = np.array([self.title, self.authors[0], self.publishDate, self.score, self.id])
+                #todo new
+                self.list = np.array([self.title, self.authors[0], self.publishDate, self.score, self.id])
+            except AttributeError:
+                self.status = False
+                print('Exception handled')
         else:
             self.status = False
 
-
     def set_score(self, filter_options):
-            self.score = r.compute_score(self, filter_options)
-
-
+        self.score = r.compute_score(self, filter_options)

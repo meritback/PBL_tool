@@ -1,8 +1,5 @@
-#import sys
-#sys.path.append('/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages')
-#import numpy
 import re
-import urllib.request
+import requests
 import argparse
 import paper
 import arguments
@@ -11,7 +8,7 @@ import dataframe
 
 def pubmed(keyword, m, filter_options):
 
-    print("runnning pubmed")
+    print("running pubmed")
     print(filter_options)
 
     # set keyword in arguments class
@@ -33,7 +30,7 @@ def pubmed(keyword, m, filter_options):
     # published within last 5 years
     if 'published recently' in filter_options and keyword != "":
         url = url + '&reldate=1826'
-    website = urllib.request.urlopen(url).read().decode('utf-8')
+    website = requests.post(url).text
 
     queryKey = re.search(r'(?<=<QueryKey>)\d+(?=<\/QueryKey>)', website).group()
     webEnv = re.search(r'(?<=<WebEnv>)[\w\W]*(?=<\/WebEnv>)', website).group()
@@ -45,7 +42,7 @@ def pubmed(keyword, m, filter_options):
     else:
         url = f'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&query_key={queryKey}&WebEnv' \
               f'={webEnv}&rettype=medline'
-    website = urllib.request.urlopen(url).read().decode('utf-8')
+    website = requests.post(url).text
     website = website.strip('\n')
     medlineList = website.split('\n\n')
     website = ''
@@ -56,7 +53,7 @@ def pubmed(keyword, m, filter_options):
         if paperObject.status:
             paperList.append(paperObject)
         del medlineList[0]
-    #sort papers by their score and use cutOff
+    # sort papers by their score and use cutOff
 
     if int(m) != -1:
         cutOffList = paperList[0:int(m)]
@@ -64,8 +61,7 @@ def pubmed(keyword, m, filter_options):
     else:
         sortedList = sorted(paperList, key=lambda paper: paper.score, reverse=True);
 
-
-    #return dataframe.create_df(paperList)
+    # return dataframe.create_df(paperList)
     return dataframe.create_df(sortedList)
 
 
@@ -93,5 +89,5 @@ def main():
 
 
 if __name__ == "__main__":
-   # stuff only to run when not called via 'import' here
-   main()
+    # stuff only to run when not called via 'import' here
+    main()
