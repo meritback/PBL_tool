@@ -16,11 +16,11 @@ def input_post():
     try:
         list = runner.pubmed(keyword, number, filter_options)
         # add hyperlink for each ID
-        list['ID']=('<a href=https://pubmed.ncbi.nlm.nih.gov/' + list['ID'] + '/ >' + list['ID'] + '</a>')
+        list['ID'] = ('<a href=https://pubmed.ncbi.nlm.nih.gov/' + list['ID'] + '/ >' + list['ID'] + '</a>')
         return render_template('output.html', key=keyword, tables=[list.to_html(classes='data', header="true", escape=False)],
                                titles=list.columns.values, options=filter_options, check='score')
     except (AttributeError):
-        return render_template('outputError.html', key = keyword)
+        return render_template('outputError.html', key=keyword)
 
 
 @app.route('/output', methods=['POST'])
@@ -32,7 +32,9 @@ def sorting():
         sorted_list = list.sort_values(by=[sort_by], ascending=[False])
     else: #everything else is fine
         sorted_list = list.sort_values(by=[sort_by])
-    return render_template('output.html', key=keyword, tables=[sorted_list.to_html(classes='data', header="true")], titles=list.columns.values, options=filter_options,check=sort_by)
+    return render_template('output.html', key=keyword, tables=[sorted_list.to_html(classes='data', header="true", escape=False)],
+                           titles=list.columns.values, options=filter_options,check=sort_by)
+
 
 
 if __name__ == '__main__':

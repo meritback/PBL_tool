@@ -31,7 +31,7 @@ def pubmed(keyword, m, filter_options):
 
     # check filter options
     # published within last 5 years
-    if 'published recently' in filter_options:
+    if 'published recently' in filter_options and keyword != "":
         url = url + '&reldate=1826'
     website = urllib.request.urlopen(url).read().decode('utf-8')
 

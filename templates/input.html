@@ -7,7 +7,7 @@
           <input type="text" pattern="^[\x20-\x7F]+$"  name="keyword_input" id="keyword_input"/>
 
           <label name="number_input">amount of results:</label>
-          <!--add a max of 100 000 eg -->
+          <!--set max to 100 000 eg -->
           <input type="number" min="-1" max="100" name="number_input" id="number_input"/><br>
 
 
@@ -18,7 +18,8 @@
           <label for="popular"> cited frequently (more than ... times?) </label><br>
 
           <input type="submit" name="search"/>
-          <p>note: please only use ASCII characters</p>
+          <!-- note for number input!!-->
+          <p>note: please only use ASCII characters. </p>
       </form>
   </div>
 {% endblock %}
