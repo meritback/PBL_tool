@@ -35,6 +35,11 @@ def sorting():
     return render_template('output.html', key=keyword, tables=[sorted_list.to_html(classes='data', header="true", escape=False)],
                            titles=list.columns.values, options=filter_options,check=sort_by)
 
+@app.route('/restart/')
+def my_link():
+  print ('I got clicked!')
+
+  return render_template('input.html')
 
 
 if __name__ == '__main__':

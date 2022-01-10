@@ -45,6 +45,13 @@
       width: 1200px;
       margin: 0 auto;
     }
+
+    .return {
+      text-align: right;
+      padding: 10px;
+
+    }
+
     div.input {
       padding: 10px 0 30px 0;
       background-color: #E6E6FA;
@@ -75,7 +82,14 @@
         <h1 class="logo">Keyword Searching Tool</h1>
       </div>
     </header>
+    <div class="return">
+      <strong><nav>
+            <a href="{{ url_for('input') }}">startpage</a></li>
+        </nav></strong>
+    </div>
+
     <div class="container">
+
       {% block content %}
       {% endblock %}
     </div>

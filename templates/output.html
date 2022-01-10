@@ -1,10 +1,9 @@
 {% extends "layout.html" %}
 {% block content %}
    <div class="output">
-       <input type="button" value="Startpage" style="float: right;">
-       <h1 style="font-size: 25px;color:#37473c;text-decoration: underline">OUTPUT</h1>
-
-        <p style="font-size: 15px">you searched for: <p style="color: #335c37;padding: 1px;font-weight: bold;text-transform: uppercase"> {{key}}</p>
+       <!--<h1 style="font-size: 25px;color:#37473c;text-decoration: underline">OUTPUT</h1>-->
+        <h1 style="font-size: 20px;color:#37473c">Results for {{key}}:</h1>
+        <!--<p style="font-size: 15px">you searched for: <p style="color: #335c37;padding: 1px;font-weight: bold;text-transform: uppercase"> {{key}}</p>-->
 
        <form method="post" action = {{url_for('sorting')}}>
         {% if (check == 'score'): %}
